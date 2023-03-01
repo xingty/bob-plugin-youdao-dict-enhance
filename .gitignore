@@ -1,9 +1,9 @@
 HELP.md
-target/
+target/*
 
 
 ### VS Code ###
 .vscode/
-build
+build/*
 .DS_Store
-.bobplugin
+*.bobplugin

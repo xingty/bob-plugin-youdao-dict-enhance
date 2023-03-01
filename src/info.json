@@ -7,7 +7,7 @@
 	"icon": "icon.png",
 	"author": "bigbyto",
 	"homepage": "https://github.com/xingty/bob-plugin-youdao-dict-enhance",
-	"appcast": "",
+	"appcast": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/blob/main/appcast.json",
 	"minBobVersion": "0.5.0",
 	"options": [
     {
