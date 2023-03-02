@@ -4,7 +4,7 @@
     {
       "version": "0.1.4",
       "desc": "修复bug",
-      "sha256": "ab6e998cc10a322ca9068482d26d49d24d0ab7033da43b8926a6fbea3adad053",
+      "sha256": "76639a5431c3ebd727b5fcb3f42a972d8682dae0d64daddc2974c1b59538374f",
       "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.1.4/bob-plugin-youdao-dict_v0.1.4.bobplugin",
       "minBobVersion": "0.5.0"
     },

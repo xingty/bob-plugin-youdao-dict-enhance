@@ -89,8 +89,9 @@ function doTranslate(query,completion) {
           })
           let toParagraphs = ['无'];
           if (resp.data.ec.web_trans) {
-            toParagraphs = resp.data.ec.web_trans.join('、');
+            toParagraphs = [resp.data.ec.web_trans.join('、')];
           }
+          $log.info(JSON.stringify(toParagraphs))
           completion({
             result: {
               from: query.detectFrom,
