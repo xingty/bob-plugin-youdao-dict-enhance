@@ -23,7 +23,7 @@ function translate(query, completion) {
 	const type = $option.type;
 	const text = query.text;
 	if (type !== 'all') {
-		if (countWords(text,parseInt(type))) {
+		if (countWords(text,parseInt(type)) > 1) {
 			completion({
 				result: {
 					toParagraphs: ['单词超过设置的数量'],

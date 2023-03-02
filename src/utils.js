@@ -1,9 +1,8 @@
-
 /**
  * 统计单词数量是否到达n
  * @param {*} text 输出文本
  * @param {*} n 单词数量,输入文本的单词到达n后结束遍历
- * @returns true if the text's words > n, otherwise false
+ * @returns -1小于n 0等于n 1大于n
  */
 function countWords(text,n) {
   let total = 0;
@@ -16,7 +15,7 @@ function countWords(text,n) {
 
       wordStart = false;
       if (total > n) {
-        return true;
+        return 1;
       }
     } else {
       wordStart = true;
@@ -27,7 +26,13 @@ function countWords(text,n) {
     total += 1;
   }
 
-  return total > n;
+  if (total < n) {
+    return -1;
+  } else if (total == n) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
 exports.countWords = countWords;

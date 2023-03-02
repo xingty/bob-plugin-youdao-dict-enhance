@@ -87,12 +87,16 @@ function doTranslate(query,completion) {
             name: '标签',
             value: (resp.data.ec.exam_type ? resp.data.ec.exam_type.join('/') : '')
           })
+          let toParagraphs = ['无'];
+          if (resp.data.ec.web_trans) {
+            toParagraphs = resp.data.ec.web_trans.join('、');
+          }
           completion({
             result: {
               from: query.detectFrom,
               to: query.detectTo,
               fromParagraphs: translate_text.split('\n'),
-              toParagraphs: [resp.data.ec.web_trans.join('、')],
+              toParagraphs: toParagraphs,
               toDict: toDict,
             },
           });
