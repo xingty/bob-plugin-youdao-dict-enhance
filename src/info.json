@@ -1,13 +1,13 @@
 {
 	"identifier": "org.wiyi.plugin.youdao-dict",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"category": "translate",
 	"name": "有道词典+",
 	"summary": "有道翻译API,可以选择翻译单词或句子",
 	"icon": "icon.png",
 	"author": "bigbyto",
 	"homepage": "https://github.com/xingty/bob-plugin-youdao-dict-enhance",
-	"appcast": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/blob/main/appcast.json",
+	"appcast": "https://raw.githubusercontent.com/xingty/bob-plugin-youdao-dict-enhance/main/appcast.json",
 	"minBobVersion": "0.5.0",
 	"options": [
     {
