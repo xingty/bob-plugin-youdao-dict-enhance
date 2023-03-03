@@ -2,10 +2,10 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
-      "version": "0.1.4",
-      "desc": "修复bug",
-      "sha256": "76639a5431c3ebd727b5fcb3f42a972d8682dae0d64daddc2974c1b59538374f",
-      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.1.4/bob-plugin-youdao-dict_v0.1.4.bobplugin",
+     "version": "0.2.0",
+      "desc": "支持官方和WEB的API,代码重构",
+      "sha256": "9a67df3509aa1456b52ee0cf2a8f025ca42ea545cc2d4f3791d8baf0d74332af",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.0/bob-plugin-youdao-dict_v0.2.0.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {

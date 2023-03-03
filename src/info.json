@@ -1,10 +1,10 @@
 {
 	"identifier": "org.wiyi.plugin.youdao-dict",
-	"version": "0.1.4",
+  "version": "0.2.0",
 	"category": "translate",
 	"name": "有道词典+",
 	"summary": "有道翻译API,可以选择翻译单词或句子",
-	"icon": "icon.png",
+	"icon": "105",
 	"author": "bigbyto",
 	"homepage": "https://github.com/xingty/bob-plugin-youdao-dict-enhance",
 	"appcast": "https://raw.githubusercontent.com/xingty/bob-plugin-youdao-dict-enhance/main/appcast.json",
@@ -19,6 +19,10 @@
         {
           "title": "网页API(免费)",
           "value": "web-api"
+        },
+        {
+          "title": "官方API",
+          "value": "open-api"
         }
       ],
       "desc": "选择翻译的API"
@@ -27,11 +31,11 @@
       "identifier": "type",
       "type": "menu",
       "title": "单词数",
-      "defaultValue": "all",
+      "defaultValue": "0",
       "menuValues": [
         {
           "title": "总是翻译",
-          "value": "all"
+          "value": "0"
         },
         {
           "title": "1",
@@ -75,6 +79,18 @@
         }
       ],
       "desc": "单词数大于这个值插件不翻译"
+    },
+    {
+      "identifier": "appid",
+      "type": "text",
+      "title": "APPID",
+      "desc": "网页API不需填写"
+    },
+    {
+      "identifier": "secret",
+      "type": "text",
+      "title": "Secret",
+      "desc": "网页API不需填写"
     }
 	]
 }

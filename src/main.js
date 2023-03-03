@@ -1,6 +1,6 @@
 var config = require('./config.js');
-var countWords = require('./utils').countWords
-var doTranslate = require('./translator').doTranslate
+var countWords = require('./utils').countWords;
+var translator = require('./translator');
 
 function supportLanguages() {
 	return config.supportedLanguages.map(([standardLang]) => standardLang);
@@ -9,31 +9,43 @@ function supportLanguages() {
 var langMap = new Map(config.supportedLanguages);
 // var langMapReverse = new Map(config.supportedLanguages.map(([standardLang, lang]) => [lang, standardLang]));
 
-function translate(query, completion) {
-	const targetLanguage = langMap.get(query.detectTo);
-	if (!targetLanguage) {
-		const err = new Error();
-		Object.assign(err, {
-				_type: 'unsupportLanguage',
-				_message: '不支持该语种',
+async function translate(query, completion) {
+	const supportedLanguages = langMap.get(query.detectTo);
+	const from = query.detectFrom;
+	if (!supportedLanguages) {
+		completion({
+			error: {
+				type: 'unsupportLanguage',
+				message: '不支持该语种'
+			}
 		});
-		throw err;
 	}	
 
-	const type = $option.type;
+	const wordNumbers = parseInt($option.type);
 	const text = query.text;
-	if (type !== 'all') {
-		if (countWords(text,parseInt(type)) >= 1) {
-			completion({
-				result: {
-					toParagraphs: ['单词超过设置的数量'],
-				}
-			});
-			return;
-		}
+	if (wordNumbers > 0 && from === 'en' && countWords(text,wordNumbers) >= 1) {
+		completion({
+			error: {
+				type: 'unsupportLanguage',
+				message: '翻译的单词超过设置的数量上限'
+			}
+		});
+		return;
 	}
 
-	doTranslate(query,completion);
+	try {
+		let result = await translator.translate(text,query.detectFrom,query.detectTo);
+		completion({ result });
+	} catch(err) {
+		let type = err.type || 'unknown';
+		let message = err.message || '未知错误';
+		completion({
+			error: {
+				type,
+				message
+			}
+		});
+	}
 }
 
 exports.supportLanguages = supportLanguages;
