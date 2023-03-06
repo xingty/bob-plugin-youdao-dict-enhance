@@ -18,15 +18,17 @@
 
 ![](https://user-images.githubusercontent.com/3600657/222902074-c70d7905-7d26-4964-a6d2-8bf90bcd55d3.png)
 
+
+
 ## 根据单词数进行翻译
 
 如果选中文本超过选定的单词数量，插件不会翻译。比如选择的是`1`，选中`Message Queue `，因为有2个单词，插件不会请求API，直接返回不翻译的结果。
 
-<img src="https://user-images.githubusercontent.com/3600657/222195336-9f12a375-4287-4677-9cd9-2cac50a2c684.png"  style="border: 1px solid black;">
+![](https://user-images.githubusercontent.com/3600657/223156638-8a72cdfd-896e-4a29-87b7-4df4a3115ce3.png)
 
-<img src="https://user-images.githubusercontent.com/3600657/222761347-f493b4ca-33ac-4048-b129-edba1483c224.png"  style="border: 1px solid black;">
 
-<img src="https://user-images.githubusercontent.com/3600657/222761222-b93b415a-2e0e-47eb-bfee-ef022b7a1b75.png"  style="border: 1px solid black;">
+
+<img src="https://user-images.githubusercontent.com/3600657/223155637-ed90fb1f-a37f-469b-8659-7658ddcca19e.png" >
 
 ## License
 MIT
