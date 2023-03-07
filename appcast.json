@@ -4,7 +4,7 @@
     {
      "version": "0.2.0",
       "desc": "支持官方和WEB的API,代码重构",
-      "sha256": "b01060b8d9712409ea8b8b4da51ac06cded48b81073bfef62ec8fc14f95f544a",
+      "sha256": "86dc1c3e1fba5a6b8812d4d1340db01c870ab2d54065f8d0ec822c1b26d11c52",
       "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.0/bob-plugin-youdao-dict_v0.2.0.bobplugin",
       "minBobVersion": "0.5.0"
     },
