@@ -145,4 +145,8 @@ function truncate(text) {
   return text.substring(0, 10) + len + text.substring(len-10, len);
 }
 
-exports.doTranslate = doTranslate;
+
+module.exports = {
+  type: 'open-api',
+  doTranslate: doTranslate
+}

@@ -161,4 +161,7 @@ function parseResponse(data,text) {
   }
 }
 
-exports.doTranslate = doTranslate;
+module.exports = {
+  type: 'web-api',
+  doTranslate: doTranslate
+}
