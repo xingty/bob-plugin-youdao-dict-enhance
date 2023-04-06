@@ -141,6 +141,18 @@ function parseResponse(data,text) {
     data.typos.typo.forEach( e => {
       exchanges.push({name: e.trans, words: [e.word]})
     });
+  } else if (data.ce && data.ce.word) {
+    let phases = '';
+    let words = data.ce.word.trs.map(w => {
+      phases += w['#text'] + '、 ';
+      return {
+        word: w['#text'],
+        means: [w['#tran']]
+      }
+    });
+
+    toParagraphs.push(phases);
+    relatedWordParts.push({ part: 'dict', words });
   }
 
   if (toParagraphs.length === 0) {
