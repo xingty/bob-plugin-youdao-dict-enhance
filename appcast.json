@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.1",
+      "desc": "",
+      "sha256": "2252d57b41eb2204c20a6b98fad3d8e12cde82c8391cd4f52b970ce54c8d3fa2",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.1/bob-plugin-youdao-dict_v0.2.1.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.0",
       "desc": "支持官方和WEB的API,代码重构",
       "sha256": "86dc1c3e1fba5a6b8812d4d1340db01c870ab2d54065f8d0ec822c1b26d11c52",
