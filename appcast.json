@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.2",
+      "desc": "解决中文字符单词无法统计问题",
+      "sha256": "aed2f349a33b9414ff9535f2c812736ce3cc1c8ba2a1c832d632404ed31b93a5",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.2/bob-plugin-youdao-dict_v0.2.2.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.1",
       "desc": "",
       "sha256": "2252d57b41eb2204c20a6b98fad3d8e12cde82c8391cd4f52b970ce54c8d3fa2",
