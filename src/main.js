@@ -23,7 +23,7 @@ async function translate(query, completion) {
 
 	const wordNumbers = parseInt($option.type);
 	const text = query.text;
-	if (wordNumbers > 0 && from === 'en' && countWords(text,wordNumbers) >= 1) {
+	if (wordNumbers > 0 && countWords(text,wordNumbers) >= 1) {
 		completion({
 			error: {
 				type: 'unsupportLanguage',

@@ -1,3 +1,12 @@
+
+const SEPARATORS_EN = new Set([
+  ',','.','!','?',' '
+])
+
+const SEPARATORS_ZH = new Set([
+  '\uff0c','。','\uff01','\uff1f'
+])
+
 /**
  * 统计单词数量是否到达n
  * @param {*} text 输出文本
@@ -8,9 +17,15 @@ function countWords(text,n) {
   let total = 0;
   let wordStart = false;
   for (let i=0;i<text.length;i++) {
-    if (text.charAt(i) === ' ') {
+    let c = text.charAt(i);
+    let chatCode = c.charCodeAt(0)
+    if (SEPARATORS_EN.has(c) || chatCode > 127) {
       if (wordStart) {
         total += 1;
+      }
+
+      if (chatCode > 127 && !SEPARATORS_ZH.has(c)) {
+        total += 1
       }
 
       wordStart = false;
