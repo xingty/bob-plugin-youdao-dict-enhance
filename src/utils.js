@@ -6,7 +6,6 @@ const SEPARATORS_EN = new Set([
 const SEPARATORS_ZH = new Set([
   '\uff0c','。','\uff01','\uff1f'
 ])
-let res2 = countWords('conne- ctor', 1);
 
 /**
  * 统计单词数量是否到达n
