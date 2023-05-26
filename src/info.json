@@ -1,6 +1,6 @@
 {
 	"identifier": "org.wiyi.plugin.youdao-dict",
-  "version": "0.2.2",
+  "version": "0.2.3",
 	"category": "translate",
 	"name": "有道词典+",
 	"summary": "有道翻译API,可以选择翻译单词或句子",

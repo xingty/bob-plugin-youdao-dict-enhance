@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.3",
+      "desc": "解决单词连接符导致的单词数统计问题",
+      "sha256": "69e00236bad81ddcbead6172a7e59f8d83f23279932b2b80f67b4b7385f3cc21",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.3/bob-plugin-youdao-dict_v0.2.3.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.2",
       "desc": "解决中文字符单词无法统计问题",
       "sha256": "aed2f349a33b9414ff9535f2c812736ce3cc1c8ba2a1c832d632404ed31b93a5",

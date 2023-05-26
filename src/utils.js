@@ -6,6 +6,7 @@ const SEPARATORS_EN = new Set([
 const SEPARATORS_ZH = new Set([
   '\uff0c','。','\uff01','\uff1f'
 ])
+let res2 = countWords('conne- ctor', 1);
 
 /**
  * 统计单词数量是否到达n
@@ -16,10 +17,27 @@ const SEPARATORS_ZH = new Set([
 function countWords(text,n) {
   let total = 0;
   let wordStart = false;
+  let hasConnector = false;
   for (let i=0;i<text.length;i++) {
     let c = text.charAt(i);
-    let chatCode = c.charCodeAt(0)
+    let chatCode = c.charCodeAt(i);
+
+    if (c === '-') {
+      hasConnector = true;
+      continue;
+    }
+    
     if (SEPARATORS_EN.has(c) || chatCode > 127) {
+      //处理"connec- tor"这种情况
+      if (hasConnector) { continue; }
+
+      //处理"connec -tor"这种情况
+      if (c === ' ' && i < text.length-2) {
+        if (text.charAt(i+1) === '-') {
+          continue;
+        }
+      }
+
       if (wordStart) {
         total += 1;
       }
@@ -34,6 +52,7 @@ function countWords(text,n) {
       }
     } else {
       wordStart = true;
+      hasConnector = false;
     }
   }
 
