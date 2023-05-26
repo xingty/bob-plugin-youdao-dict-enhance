@@ -23,7 +23,7 @@ echo "Current version: $cv, build version: $version"
 /bin/bash ./build.sh $version
 
 ln=$(cat appcast.json | grep -n "\"$version\""|awk -F: 'NR==1{print $1}')
-sha256=$(shasum -a 256 ./build/bob-plugin-youdao-dict_v$version.bobplugin | awk '{print $1}')
+sha256=$(sha256sum ./build/bob-plugin-youdao-dict_v$version.bobplugin | awk '{print $1}')
 echo "sha256: $sha256"
 if [[ $ln -gt 0 ]]; then
   sha_ln=`expr $ln + 2`

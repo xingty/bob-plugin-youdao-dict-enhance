@@ -1,0 +1,45 @@
+name: Build and release
+on: 
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get version
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Build archive
+        run: |
+          /bin/bash release.sh ${{ steps.get_version.outputs.version-without-v }} ${{ steps.tag.outputs.message }}
+      
+      - name: Commit files
+        run: |
+          git config --global user.name 'bigbyto'
+          git config --global user.email 'bigbyto@gmail.com'
+          git commit -am '${{ steps.get_version.outputs.version }}'
+
+      - name: upload
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: ${{ steps.get_version.outputs.version }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/${{ github.event.repository.name }}-${{ steps.get_version.outputs.version }}.bobplugin
+          asset_name: bob-plugin-youdao-dict_${{ steps.get_version.outputs.version }}.bobplugin
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: ${{ steps.tag.outputs.message }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
