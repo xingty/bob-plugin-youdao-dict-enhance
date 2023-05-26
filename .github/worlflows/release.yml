@@ -32,7 +32,7 @@ jobs:
         with:
           release_name: ${{ steps.get_version.outputs.version }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/${{ github.event.repository.name }}-${{ steps.get_version.outputs.version }}.bobplugin
+          file: build/bob-plugin-youdao-dict_${{ steps.get_version.outputs.version }}.bobplugin
           asset_name: bob-plugin-youdao-dict_${{ steps.get_version.outputs.version }}.bobplugin
           tag: ${{ github.ref }}
           overwrite: true
