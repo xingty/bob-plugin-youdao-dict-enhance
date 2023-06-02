@@ -19,7 +19,7 @@ function countWords(text,n) {
   let hasConnector = false;
   for (let i=0;i<text.length;i++) {
     let c = text.charAt(i);
-    let chatCode = c.charCodeAt(i);
+    let chatCode = text.charCodeAt(i);
 
     if (c === '-') {
       hasConnector = true;
