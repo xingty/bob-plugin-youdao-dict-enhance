@@ -115,6 +115,31 @@ function parseResponse(data,text) {
         value: webtrs
       });
     }
+    
+    $log.info(data.collins)
+    if (data.collins) {
+      let entries = data.collins && data.collins.collins_entries || [];
+      let sentences = entries.filter(entry => 'entries' in entry).reduce((acc,cur) => {
+        acc.concat(cur.entries.entry);
+        return acc;
+      },[]);
+
+      sentences.forEach(sentence => {
+        if (!sentence.tran_entry) {
+          return;
+        }
+
+        let trans = sentence.tran_entry[0];
+        let post_entry = trans.post_entry;
+        let name = `${post_entry.pos_tips}(${post_entry.pos})`;
+        let example = trans.exam_sents.sent[0];
+        let value = `${example.eng_sent}\n${example.chn_sent}`;
+        additions.push({
+          name: name,
+          value: value
+        });
+      })
+    }
 
     if (data.rel_word && data.rel_word.rels) {
       data.rel_word.rels.forEach(item => {
