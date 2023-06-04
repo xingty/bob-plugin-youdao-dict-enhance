@@ -3,7 +3,7 @@ var request = require('./api-request');
 
 var BASE_URL = 'https://dict.youdao.com/jsonapi_s?doctype=json&jsonversion=4';
 
-function doTranslate(text,from, to) {
+function doTranslate(text,from, to,appId,secret,showSentence,showPhrs) {
   let translate_text = text || ''
   let y = ["option_avatar", "nickname"]
       , w = "Mk6hqtUp33DGGtoS63tTJbMUYjRrG1Lu"
@@ -25,19 +25,19 @@ function doTranslate(text,from, to) {
     "t": time
   });
 
-  return doQuery(body);
+  return doQuery(body,showSentence,showPhrs);
 }
 
-async function doQuery(body) {
+async function doQuery(body,showSentence,showPhrs) {
   try {
     let resp = await request.query(body,BASE_URL);
-    return Promise.resolve(parseResponse(resp.data,body.q));
+    return Promise.resolve(parseResponse(resp.data,body.q,showSentence,showPhrs));
   } catch(err) {
     return Promise.reject(err);
   }
 }
 
-function parseResponse(data,text) {
+function parseResponse(data,text,showSentence,showPhrs) {
 	let additions = [];
 	let phonetics = [];
 	let exchanges = [];
@@ -100,7 +100,43 @@ function parseResponse(data,text) {
       })
     }
 
-    if (data.phrs && data.phrs.phrs) {
+    //添加例句
+    if (showSentence && data.collins) {
+      let entries = data.collins && data.collins.collins_entries || [];
+      let sentences = entries.filter(entry => 'entries' in entry).reduce((acc,cur) => {
+        acc = acc.concat(cur.entries.entry);
+        return acc;
+      },[]);
+
+      let values = sentences.filter(s => {
+        if (!s.tran_entry) { return false; } 
+
+        let trans = s.tran_entry[0];
+        if (!trans.pos_entry || !trans.exam_sents) { return false; }
+
+        return true;
+      }).reduce((acc,sentence) => {
+        let trans = sentence.tran_entry[0];
+        let pos_entry = trans.pos_entry;
+        acc += `${pos_entry.pos_tips}(${pos_entry.pos}): \n`;
+        
+        trans.exam_sents.sent.forEach(example => {
+          let value = `${example.eng_sent} (${example.chn_sent})`;
+          acc += value + '\n\n';
+        })
+
+        return acc;
+      },'');
+
+      additions.push({
+        name: '例句',
+        value: values
+      });
+    }
+
+
+    //添加词组
+    if (showPhrs && data.phrs && data.phrs.phrs) {
       let phrs = data.phrs.phrs;
       let webtrs = '';
       // let len = Math.min(10,phrs.length);
@@ -116,31 +152,6 @@ function parseResponse(data,text) {
       });
     }
     
-    $log.info(data.collins)
-    if (data.collins) {
-      let entries = data.collins && data.collins.collins_entries || [];
-      let sentences = entries.filter(entry => 'entries' in entry).reduce((acc,cur) => {
-        acc.concat(cur.entries.entry);
-        return acc;
-      },[]);
-
-      sentences.forEach(sentence => {
-        if (!sentence.tran_entry) {
-          return;
-        }
-
-        let trans = sentence.tran_entry[0];
-        let post_entry = trans.post_entry;
-        let name = `${post_entry.pos_tips}(${post_entry.pos})`;
-        let example = trans.exam_sents.sent[0];
-        let value = `${example.eng_sent}\n${example.chn_sent}`;
-        additions.push({
-          name: name,
-          value: value
-        });
-      })
-    }
-
     if (data.rel_word && data.rel_word.rels) {
       data.rel_word.rels.forEach(item => {
         let part = item.rel.pos;
