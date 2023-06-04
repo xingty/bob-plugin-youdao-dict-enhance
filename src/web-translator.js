@@ -102,7 +102,7 @@ function parseResponse(data,text,showSentence,showPhrs) {
 
     //添加例句
     if (showSentence && data.collins) {
-      let entries = data.collins && data.collins.collins_entries || [];
+      let entries = data.collins.collins_entries || [];
       let sentences = entries.filter(entry => 'entries' in entry).reduce((acc,cur) => {
         acc = acc.concat(cur.entries.entry);
         return acc;
@@ -118,22 +118,25 @@ function parseResponse(data,text,showSentence,showPhrs) {
       }).reduce((acc,sentence) => {
         let trans = sentence.tran_entry[0];
         let pos_entry = trans.pos_entry;
-        acc += `${pos_entry.pos_tips}(${pos_entry.pos}): \n`;
+        let key = `${pos_entry.pos_tips}(${pos_entry.pos.toLowerCase()}): `;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
         
         trans.exam_sents.sent.forEach(example => {
-          let value = `${example.eng_sent} (${example.chn_sent})`;
-          acc += value + '\n\n';
+          let value = `${example.eng_sent} (${example.chn_sent})\n`;
+          acc[key].push(value);
         })
 
         return acc;
-      },'');
+      },{});
 
-      additions.push({
-        name: '例句',
-        value: values
-      });
+      additions.push({ name: '例句',value: '⬇️' });
+      for (let name in values) {
+        let value = values[name].join('\n');
+        additions.push({ name,value });
+      }
     }
-
 
     //添加词组
     if (showPhrs && data.phrs && data.phrs.phrs) {
