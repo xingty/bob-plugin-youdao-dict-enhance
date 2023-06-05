@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.5",
+      "desc": "支持例句功能，默认禁用词组功能，如有需要，可以在插件面板中启用",
+      "sha256": "8a2224cffe9051d54604b8111847f68edcd5d056be3db13c8e3063fdc95cb621",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.5/bob-plugin-youdao-dict_v0.2.5.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.4",
       "desc": "",
       "sha256": "ede3708994c35f2dfd6180400c05f69b04ce1afd63027649142394fe9deba041",
