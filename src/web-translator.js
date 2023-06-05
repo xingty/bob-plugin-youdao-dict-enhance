@@ -108,7 +108,7 @@ function parseResponse(data,text,showSentence,showPhrs) {
         return acc;
       },[]);
 
-      let values = sentences.filter(s => {
+      let map = sentences.filter(s => {
         if (!s.tran_entry) { return false; } 
 
         let trans = s.tran_entry[0];
@@ -120,22 +120,24 @@ function parseResponse(data,text,showSentence,showPhrs) {
         let pos_entry = trans.pos_entry;
         let tips = pos_entry.pos_tips || '';
         let key = `${tips}(${pos_entry.pos.toLowerCase()}): `;
-        if (!acc[key]) {
-          acc[key] = [];
+        if (!acc.get(key)) {
+          acc.set(key,[]);
         }
         
         trans.exam_sents.sent.forEach(example => {
           let value = `${example.eng_sent} (${example.chn_sent})\n`;
-          acc[key].push(value);
+          acc.get(key).push(value);
         });
 
         return acc;
-      },{});
+      },new Map());
 
-      additions.push({ name: '例句',value: '⬇️' });
-      for (let name in values) {
-        let value = values[name].join('\n');
-        additions.push({ name,value });
+      if (map.size > 0) {
+        additions.push({ name: '例句',value: '⬇️' });
+        map.forEach((val,name) => {
+          let value = val.join('\n');
+          additions.push({ name,value });
+        })
       }
     }
 
