@@ -118,7 +118,8 @@ function parseResponse(data,text,showSentence,showPhrs) {
       }).reduce((acc,sentence) => {
         let trans = sentence.tran_entry[0];
         let pos_entry = trans.pos_entry;
-        let key = `${pos_entry.pos_tips}(${pos_entry.pos.toLowerCase()}): `;
+        let tips = pos_entry.pos_tips || '';
+        let key = `${tips}(${pos_entry.pos.toLowerCase()}): `;
         if (!acc[key]) {
           acc[key] = [];
         }
@@ -126,7 +127,7 @@ function parseResponse(data,text,showSentence,showPhrs) {
         trans.exam_sents.sent.forEach(example => {
           let value = `${example.eng_sent} (${example.chn_sent})\n`;
           acc[key].push(value);
-        })
+        });
 
         return acc;
       },{});
