@@ -7,10 +7,15 @@ var translators = [
 ];
 
 function translate(text,from='auto',to='auto') {
+  const showSentence = $option.showSentence === '1';
+  const showPhrs = $option.showPhrs === '1';
   const apiType = $option.api;
   for (const translator of translators) {
     if (translator.type === apiType) {
-      return translator.doTranslate(text,from,to,$option.appid,$option.secret);
+      return translator.doTranslate(
+        text,from,to,$option.appid,$option.secret,
+        showSentence,showPhrs
+      );
     }
   }
 

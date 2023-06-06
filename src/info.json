@@ -1,6 +1,6 @@
 {
 	"identifier": "org.wiyi.plugin.youdao-dict",
-  "version": "0.2.4",
+  "version": "0.2.5",
 	"category": "translate",
 	"name": "有道词典+",
 	"summary": "有道翻译API,可以选择翻译单词或句子",
@@ -99,6 +99,40 @@
       "type": "text",
       "title": "Secret",
       "desc": "网页API不需填写"
+    },
+    {
+      "identifier": "showSentence",
+      "type": "menu",
+      "title": "显示例句",
+      "defaultValue": "1",
+      "menuValues": [
+        {
+          "title": "是",
+          "value": "1"
+        },
+        {
+          "title": "否",
+          "value": "0"
+        }
+      ],
+      "desc": "是否显示例句(暂时只有网页API支持)"
+    },
+    {
+      "identifier": "showPhrs",
+      "type": "menu",
+      "title": "显示词组",
+      "defaultValue": "1",
+      "menuValues": [
+        {
+          "title": "是",
+          "value": "1"
+        },
+        {
+          "title": "否",
+          "value": "0"
+        }
+      ],
+      "desc": "是否显示词组"
     }
 	]
 }
