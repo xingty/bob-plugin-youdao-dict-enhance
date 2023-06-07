@@ -3,7 +3,7 @@ var request = require('./api-request');
 
 var BASE_URL = 'https://dict.youdao.com/jsonapi_s?doctype=json&jsonversion=4';
 
-function doTranslate(text,from, to,appId,secret,showSentence,showPhrs) {
+function doTranslate(text,from, to,appId,secret,showSentence,maxPhrs) {
   let translate_text = text || ''
   let y = ["option_avatar", "nickname"]
       , w = "Mk6hqtUp33DGGtoS63tTJbMUYjRrG1Lu"
@@ -25,19 +25,19 @@ function doTranslate(text,from, to,appId,secret,showSentence,showPhrs) {
     "t": time
   });
 
-  return doQuery(body,showSentence,showPhrs);
+  return doQuery(body,showSentence,maxPhrs);
 }
 
-async function doQuery(body,showSentence,showPhrs) {
+async function doQuery(body,showSentence,maxPhrs) {
   try {
     let resp = await request.query(body,BASE_URL);
-    return Promise.resolve(parseResponse(resp.data,body.q,showSentence,showPhrs));
+    return Promise.resolve(parseResponse(resp.data,body.q,showSentence,maxPhrs));
   } catch(err) {
     return Promise.reject(err);
   }
 }
 
-function parseResponse(data,text,showSentence,showPhrs) {
+function parseResponse(data,text,showSentence,maxPhrs) {
 	let additions = [];
 	let phonetics = [];
 	let exchanges = [];
@@ -101,7 +101,7 @@ function parseResponse(data,text,showSentence,showPhrs) {
     }
 
     //添加例句
-    if (showSentence && data.collins) {
+    if (showSentence > 0 && data.collins) {
       let entries = data.collins.collins_entries || [];
       let sentences = entries.filter(entry => 'entries' in entry).reduce((acc,cur) => {
         acc = acc.concat(cur.entries.entry);
@@ -142,14 +142,13 @@ function parseResponse(data,text,showSentence,showPhrs) {
     }
 
     //添加词组
-    if (showPhrs && data.phrs && data.phrs.phrs) {
+    if (maxPhrs > 0 && data.phrs && data.phrs.phrs) {
       let phrs = data.phrs.phrs;
       let webtrs = '';
-      // let len = Math.min(10,phrs.length);
-      let len = phrs.length;
+      let len = Math.min(maxPhrs,phrs.length);
       for (let i=1;i<=len;i++) {
         let item = phrs[i-1];
-        webtrs += `${i}) ${(item.headword+'').toLowerCase()}: ${item.translation}  `
+        webtrs += `[${i}] ${(item.headword+'').toLowerCase()}: ${item.translation}  \n`
       }
 
       additions.push({
