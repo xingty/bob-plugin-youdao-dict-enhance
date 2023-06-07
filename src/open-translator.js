@@ -1,5 +1,6 @@
 var CryptoJS = require("crypto-js");
 var request = require('./api-request');
+var countWords = require('./utils').countWords;
 
 var BASE_URL = 'https://openapi.youdao.com/api';
 var SIGN_TYPE = 'v3';
@@ -57,12 +58,16 @@ function parseResponse(data,showSentence,showPhrs) {
 	let fromParagraphs = data.returnPhrase || [ data.query ];
 
 	if (basic) {
+    let us = "https://dict.youdao.com/dictvoice?audio=" + data.query + "&type=2";
+    let uk = "https://dict.youdao.com/dictvoice?audio=" + data.query + "&type=1"
+    const num = countWords(data.query,1);
+
     phonetics.push({
       type: 'us',
       value: basic['us-phonetic'],
       tts: {
         type: "url",
-        value: "https://dict.youdao.com/dictvoice?audio=" + data.query + "&type=2"
+        value: num == 0 ? us : basic['us-speech']
       }
     });
   
@@ -71,7 +76,7 @@ function parseResponse(data,showSentence,showPhrs) {
       value: basic['uk-phonetic'],
       tts: {
         type: "url",
-        value: "https://dict.youdao.com/dictvoice?audio=" + data.query + "&type=1"
+        value: num == 0 ? uk : basic['uk-speech']
       }
     });
 
@@ -98,7 +103,7 @@ function parseResponse(data,showSentence,showPhrs) {
     let len = data.web.length;
     for (let i=1;i<=len;i++) {
       let item = data.web[i-1];
-      webtrs += `${i}) ${(item.key+'').toLowerCase()}: ${item.value.join('、')}  `
+      webtrs += `[${i}] ${(item.key+'').toLowerCase()}: ${item.value.join('、')}  \n`
     }
 
     additions.push({
