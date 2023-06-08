@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.6",
+      "desc": "1. 词组可以自选显示数量 2. 修改词组显示样式 3. 修复官方API模式下无法朗读的问题",
+      "sha256": "7ffcae03b50583a3be7557f1dbce3b692f45593340ce0190ea1a94533acd333a",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.6/bob-plugin-youdao-dict_v0.2.6.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.5",
       "desc": "支持例句功能，默认禁用词组功能，如有需要，可以在插件面板中启用",
       "sha256": "6dcb3043bd2bb4128d6706da79ad3c36212f98eb87615d4e0044c6d3238c0f6e",
