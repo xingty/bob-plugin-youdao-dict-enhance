@@ -4,7 +4,7 @@
     {
      "version": "0.2.6",
       "desc": "1. 词组可以自选显示数量 2. 修改词组显示样式 3. 修复官方API模式下无法朗读的问题",
-      "sha256": "7ffcae03b50583a3be7557f1dbce3b692f45593340ce0190ea1a94533acd333a",
+      "sha256": "da34bbecd5f1ada30eb190e23926771db73dcc61bbccf3ed113f0646af8ffcda",
       "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.6/bob-plugin-youdao-dict_v0.2.6.bobplugin",
       "minBobVersion": "0.5.0"
     },
