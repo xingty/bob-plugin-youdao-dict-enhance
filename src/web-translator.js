@@ -3,7 +3,7 @@ var request = require('./api-request');
 
 var BASE_URL = 'https://dict.youdao.com/jsonapi_s?doctype=json&jsonversion=4';
 
-function doTranslate(text,from, to,appId,secret,showSentence,maxPhrs) {
+function doTranslate(text,from, to,appId,secret,showSentence,maxPhrs,showLabel,showRelWords) {
   let translate_text = text || ''
   let y = ["option_avatar", "nickname"]
       , w = "Mk6hqtUp33DGGtoS63tTJbMUYjRrG1Lu"
@@ -25,19 +25,19 @@ function doTranslate(text,from, to,appId,secret,showSentence,maxPhrs) {
     "t": time
   });
 
-  return doQuery(body,showSentence,maxPhrs);
+  return doQuery(body,showSentence,maxPhrs,showLabel,showRelWords);
 }
 
-async function doQuery(body,showSentence,maxPhrs) {
+async function doQuery(body,showSentence,maxPhrs,showLabel,showRelWords) {
   try {
     let resp = await request.query(body,BASE_URL);
-    return Promise.resolve(parseResponse(resp.data,body.q,showSentence,maxPhrs));
+    return Promise.resolve(parseResponse(resp.data,body.q,showSentence,maxPhrs,showLabel,showRelWords));
   } catch(err) {
     return Promise.reject(err);
   }
 }
 
-function parseResponse(data,text,showSentence,maxPhrs) {
+function parseResponse(data,text,showSentence,maxPhrs,showLabel,showRelWords) {
 	let additions = [];
 	let phonetics = [];
 	let exchanges = [];
@@ -93,7 +93,7 @@ function parseResponse(data,text,showSentence,maxPhrs) {
       exchanges.push({name: '原形', words: [word.prototype]})
     }
 
-    if (data.ec.exam_type) {
+    if (showLabel && data.ec.exam_type) {
       additions.push({
         name: '标签',
         value: (data.ec.exam_type ? data.ec.exam_type.join('/') : '')
@@ -157,7 +157,7 @@ function parseResponse(data,text,showSentence,maxPhrs) {
       });
     }
     
-    if (data.rel_word && data.rel_word.rels) {
+    if (showRelWords && data.rel_word && data.rel_word.rels) {
       data.rel_word.rels.forEach(item => {
         let part = item.rel.pos;
         let words = item.rel.words.map(w => {

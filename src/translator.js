@@ -8,13 +8,15 @@ var translators = [
 
 function translate(text,from='auto',to='auto') {
   const showSentence = $option.showSentence === '1';
+  const showLabel = $option.showLabel === '1';
+  const showRelWords = $option.showRelWords === '1';
   const maxPhrs = $option.maxPhrs;
   const apiType = $option.api;
   for (const translator of translators) {
     if (translator.type === apiType) {
       return translator.doTranslate(
         text,from,to,$option.appid,$option.secret,
-        showSentence,maxPhrs
+        showSentence,maxPhrs,showLabel,showRelWords
       );
     }
   }

@@ -177,6 +177,40 @@
         }
       ],
       "desc": "最多展示的词组数量"
+    },
+    {
+      "identifier": "showRelWords",
+      "type": "menu",
+      "title": "显示相关词汇",
+      "defaultValue": "1",
+      "menuValues": [
+        {
+          "title": "是",
+          "value": "1"
+        },
+        {
+          "title": "否",
+          "value": "0"
+        }
+      ],
+      "desc": "是否显示相关词汇"
+    },
+    {
+      "identifier": "showLabel",
+      "type": "menu",
+      "title": "显示标签",
+      "defaultValue": "0",
+      "menuValues": [
+        {
+          "title": "是",
+          "value": "1"
+        },
+        {
+          "title": "否",
+          "value": "0"
+        }
+      ],
+      "desc": "是否显示标签"
     }
 	]
 }

@@ -5,7 +5,7 @@ var countWords = require('./utils').countWords;
 var BASE_URL = 'https://openapi.youdao.com/api';
 var SIGN_TYPE = 'v3';
 
-function doTranslate(text,from,to,appID,secret,showSentence,maxPhrs) {
+function doTranslate(text,from,to,appID,secret,showSentence,maxPhrs,showLabel) {
   let salt = CryptoJS.lib.WordArray.random(16).toString();
   let curtime = Math.round(new Date().getTime() / 1000);
   let str = appID + truncate(text) + salt + curtime + secret;
@@ -22,10 +22,10 @@ function doTranslate(text,from,to,appID,secret,showSentence,maxPhrs) {
     curtime: curtime
   }
 
-  return doQuery(body,showSentence,maxPhrs);
+  return doQuery(body,showSentence,maxPhrs,showLabel);
 }
 
-async function doQuery(body,showSentence,maxPhrs) {
+async function doQuery(body,showSentence,maxPhrs,showLabel) {
   try {
     let resp = await request.query(body,BASE_URL);
     let data = resp.data;
@@ -42,13 +42,13 @@ async function doQuery(body,showSentence,maxPhrs) {
         message: '找不到词汇 [ ' + body.q +' ]'
       });
     }
-    return Promise.resolve(parseResponse(data,showSentence,maxPhrs));
+    return Promise.resolve(parseResponse(data,showSentence,maxPhrs,showLabel));
   } catch(err) {
     return Promise.reject(err);
   }
 }
 
-function parseResponse(data,showSentence,maxPhrs) {
+function parseResponse(data,showSentence,maxPhrs,showLabel) {
 	let basic = data.basic;
 	let additions = [];
 	let phonetics = [];
@@ -80,7 +80,7 @@ function parseResponse(data,showSentence,maxPhrs) {
       }
     });
 
-    if (basic.exam_type) {
+    if (showLabel && basic.exam_type) {
       additions.push({ name: '标签', value: basic.exam_type.join('/') });
     }
 
