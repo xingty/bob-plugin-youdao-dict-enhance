@@ -16,7 +16,7 @@
 
 两种方式各有好坏，可以根据自己的实际情况使用。
 
-![](https://user-images.githubusercontent.com/3600657/222902074-c70d7905-7d26-4964-a6d2-8bf90bcd55d3.png)
+![](https://user-images.githubusercontent.com/3600657/246007863-f14f9989-e5b7-40b3-b008-6e947740ebb8.png)
 
 
 
