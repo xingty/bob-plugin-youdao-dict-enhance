@@ -103,19 +103,67 @@
     {
       "identifier": "showSentence",
       "type": "menu",
-      "title": "显示例句",
-      "defaultValue": "1",
+      "title": "最大例句数",
+      "defaultValue": "200",
       "menuValues": [
         {
-          "title": "是",
+          "title": "全部",
+          "value": "200"
+        },
+        {
+          "title": "0",
+          "value": "0"
+        },
+        {
+          "title": "1",
           "value": "1"
         },
         {
-          "title": "否",
-          "value": "0"
+          "title": "2",
+          "value": "2"
+        },
+        {
+          "title": "3",
+          "value": "3"
+        },
+        {
+          "title": "4",
+          "value": "4"
+        },
+        {
+          "title": "5",
+          "value": "5"
+        },
+        {
+          "title": "6",
+          "value": "6"
+        },
+        {
+          "title": "7",
+          "value": "7"
+        },
+        {
+          "title": "8",
+          "value": "8"
+        },
+        {
+          "title": "9",
+          "value": "9"
+        },
+        {
+          "title": "10",
+          "value": "10"
+        },
+        {
+          "title": "15",
+          "value": "15"
+        },
+        {
+          "title": "20",
+          "value": "20"
         }
       ],
-      "desc": "是否显示例句(暂时只有网页API支持)"
+      "desc": "显示例句数量,0为不显示"
     },
     {
       "identifier": "maxPhrs",

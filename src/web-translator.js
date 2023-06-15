@@ -119,6 +119,9 @@ function parseResponse(data,text,showSentence,maxPhrs,showLabel,showRelWords) {
         let trans = sentence.tran_entry[0];
         let pos_entry = trans.pos_entry;
         let tips = pos_entry.pos_tips || '';
+        if (tips === '\u4e60\u8bed') {
+          tips = '常用语';
+        }
         let key = `${tips}(${pos_entry.pos.toLowerCase()}): `;
         if (!acc.get(key)) {
           acc.set(key,[]);
@@ -134,6 +137,7 @@ function parseResponse(data,text,showSentence,maxPhrs,showLabel,showRelWords) {
 
       if (map.size > 0) {
         additions.push({ name: '例句',value: '⬇️' });
+        map = filterSentences(map,showSentence);
         map.forEach((val,name) => {
           let value = val.join('\n');
           additions.push({ name,value });
@@ -213,6 +217,46 @@ function parseResponse(data,text,showSentence,maxPhrs,showLabel,showRelWords) {
     toParagraphs
   }
 }
+
+function filterSentences(map,maxSentences) {
+  let total = 0;
+  let keys = [];
+  map.forEach((val,key) => {
+    total += val.length;
+    keys.push(key);
+  })
+  if (total < maxSentences) { return map; }
+
+  let counter = 0;
+  total = 0;
+  let filtered = new Map();
+
+  while (total < maxSentences && map.size > 0) {
+    let index = counter % keys.length;
+    let key = keys[index];
+    let list = map.get(key);
+    if (list.length === 0) {
+      map.delete(key);
+      keys.splice(index,1);
+      continue;
+    }
+
+    let item = list.splice(0,1)[0];
+    if (!filtered.get(key)) {
+      filtered.set(key,[]);
+    }
+
+    filtered.get(key).push(item);
+    total += 1;
+    counter += 1;
+  }
+
+  return filtered;
+}
+
+
+
+
 
 module.exports = {
   type: 'web-api',

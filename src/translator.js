@@ -7,7 +7,7 @@ var translators = [
 ];
 
 function translate(text,from='auto',to='auto') {
-  const showSentence = $option.showSentence === '1';
+  const showSentence = $option.showSentence;
   const showLabel = $option.showLabel === '1';
   const showRelWords = $option.showRelWords === '1';
   const maxPhrs = $option.maxPhrs;
