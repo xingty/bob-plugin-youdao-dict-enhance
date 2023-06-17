@@ -4,7 +4,7 @@
     {
      "version": "0.2.7",
       "desc": "1. 新增标签和相关词汇的开关 2.支持选择最大例句数量",
-      "sha256": "4bc79e321c1ff2462060c8261ccd5a8b01ea779c0fa298239600484fde6e9d8e",
+      "sha256": "bc8b12f7eddfffdbf4c927b567f14dd6ca5b513d189da81fe109d04559df5110",
       "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.7/bob-plugin-youdao-dict_v0.2.7.bobplugin",
       "minBobVersion": "0.5.0"
     },
