@@ -2,6 +2,13 @@
   "identifier": "org.wiyi.plugin.youdao-dict",
   "versions": [
     {
+     "version": "0.2.7",
+      "desc": "1. 新增标签和相关词汇的开关 2.支持选择最大例句数量",
+      "sha256": "4bc79e321c1ff2462060c8261ccd5a8b01ea779c0fa298239600484fde6e9d8e",
+      "url": "https://github.com/xingty/bob-plugin-youdao-dict-enhance/releases/download/v0.2.7/bob-plugin-youdao-dict_v0.2.7.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
      "version": "0.2.6",
       "desc": "1. 词组可以自选显示数量 2. 修改词组显示样式 3. 修复官方API模式下无法朗读的问题",
       "sha256": "da34bbecd5f1ada30eb190e23926771db73dcc61bbccf3ed113f0646af8ffcda",
